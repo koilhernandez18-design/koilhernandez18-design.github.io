@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="RruooJ6aB1VXPo_K0ZXfXNvQOvWcnONT9GbA2lUAG0E" />
 <title>John Kyle H. Torrejos — Molecular Biology &amp; Bioinformatics Researcher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<meta name="google-site-verification" content="RruooJ6aB1VXPo_K0ZXfXNvQOvWcnONT9GbA2lUAG0E" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#1B2320;
@@ -91,6 +92,83 @@
     border-color:var(--rust);
   }
   .nav-toggle{display:none;}
+
+  /* ---------- dropdown ---------- */
+  .nav-dropdown{
+    position:relative;
+  }
+  .nav-dropdown-btn{
+    background:none;
+    border:none;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--muted);
+    cursor:pointer;
+    padding:0 0 2px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    border-bottom:1px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-dropdown-btn:hover,
+  .nav-dropdown-btn:focus-visible,
+  .nav-dropdown.open .nav-dropdown-btn{
+    color:var(--ink);
+    border-color:var(--rust);
+  }
+  .nav-dropdown-btn svg{
+    width:9px; height:9px;
+    transition:transform .18s ease;
+  }
+  .nav-dropdown.open .nav-dropdown-btn svg{
+    transform:rotate(180deg);
+  }
+  .nav-dropdown-menu{
+    position:absolute;
+    top:calc(100% + 14px);
+    right:0;
+    min-width:160px;
+    background:var(--paper);
+    border:1px solid var(--rule);
+    box-shadow:0 8px 24px rgba(27,35,32,0.08);
+    list-style:none;
+    margin:0;
+    padding:6px 0;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-6px);
+    transition:opacity .15s ease, transform .15s ease, visibility .15s;
+  }
+  .nav-dropdown.open .nav-dropdown-menu{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+  .nav-dropdown-menu li + li{
+    border-top:1px solid var(--rule);
+  }
+  .nav-dropdown-menu a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 16px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--ink);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .nav-dropdown-menu a:hover,
+  .nav-dropdown-menu a:focus-visible{
+    color:var(--rust);
+  }
+  .nav-dropdown-menu a::before{
+    content:"";
+    width:5px; height:5px;
+    background:var(--rust);
+    flex-shrink:0;
+  }
 
   /* ---------- hero ---------- */
   header.hero{
@@ -218,6 +296,27 @@
     font-size:15.5px;
   }
   .entry li::marker{color:var(--rust);}
+  .entry-link{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    padding:14px 16px;
+    margin:-14px -16px 0;
+    transition:background .15s;
+  }
+  .entry-link:hover, .entry-link:focus-visible{
+    background:var(--paper-deep);
+  }
+  .entry-link:hover .entry-role, .entry-link:focus-visible .entry-role{
+    color:var(--rust);
+  }
+  .entry-more{
+    display:inline-block;
+    margin-top:12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--rust);
+  }
 
   /* ---------- competencies ---------- */
   .comp-group{
@@ -240,6 +339,14 @@
     border-left:2px solid var(--dark);
     background:var(--paper-deep);
     white-space:nowrap;
+    text-decoration:none;
+    color:inherit;
+    display:inline-block;
+    transition:background .15s, color .15s;
+  }
+  .tag:hover, .tag:focus-visible{
+    background:#fff;
+    color:var(--rust);
   }
   .comp-group.bioinfo .tag{border-color:var(--green);}
   .comp-group.software .tag{border-color:var(--blue);}
@@ -248,13 +355,26 @@
 
   /* ---------- talks ---------- */
   .talk{
-    padding:18px 0;
+    padding:0;
     border-bottom:1px solid var(--rule);
+  }
+  .talk:last-child{border-bottom:none;}
+  .talk-link{
     display:grid;
     grid-template-columns:1fr;
     gap:6px;
+    text-decoration:none;
+    color:inherit;
+    padding:18px 16px;
+    margin:0 -16px;
+    transition:background .15s;
   }
-  .talk:last-child{border-bottom:none;}
+  .talk-link:hover, .talk-link:focus-visible{
+    background:var(--paper-deep);
+  }
+  .talk-link:hover .talk-title, .talk-link:focus-visible .talk-title{
+    color:var(--rust);
+  }
   .talk-title{
     font-family:'Fraunces',serif;
     font-size:17px;
@@ -353,21 +473,57 @@
 
 <nav>
   <div class="wrap">
-    <div class="nav-mark">j. torrejos</div>
+    <div class="nav-mark">jk. torrejos</div>
     <ul class="nav-links">
       <li><a href="#about">about</a></li>
       <li><a href="#research">research</a></li>
       <li><a href="#skills">skills</a></li>
       <li><a href="#talks">talks</a></li>
       <li><a href="#contact">contact</a></li>
+      <li class="nav-dropdown" id="navDropdown">
+        <button class="nav-dropdown-btn" id="navDropdownBtn" aria-haspopup="true" aria-expanded="false">
+          menu
+          <svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="nav-dropdown-menu" id="navDropdownMenu">
+          <li><a href="/read/">Read</a></li>
+          <li><a href="/write/">Write</a></li>
+          <li><a href="/code/">Code</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>
 
+<script>
+  (function(){
+    var dropdown = document.getElementById('navDropdown');
+    var btn = document.getElementById('navDropdownBtn');
+
+    function closeDropdown(){
+      dropdown.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function toggleDropdown(e){
+      e.stopPropagation();
+      var isOpen = dropdown.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    btn.addEventListener('click', toggleDropdown);
+    document.addEventListener('click', function(e){
+      if(!dropdown.contains(e.target)) closeDropdown();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeDropdown();
+    });
+  })();
+</script>
+
 <header class="hero">
   <div class="wrap">
     <div class="hero-eyebrow mono">Quezon City, Metro Manila, Philippines</div>
-    <h1>John H.<br>Torrejos</h1>
+    <h1>John Kyle H.<br>Torrejos</h1>
     <p class="role">Molecular biology &amp; bioinformatics researcher, working where wet-lab biology meets computation.</p>
 
     <svg class="trace" viewBox="0 0 700 64" preserveAspectRatio="none" aria-hidden="true">
@@ -407,14 +563,18 @@
     <div class="timeline">
 
       <div class="entry">
+        <a class="entry-link" href="/research/taiwan-international-internship/">
         <div class="entry-role">Taiwan International Internship Program Intern</div>
         <div class="entry-org">Laboratory for Cell Dynamics, Institute of Molecular Biology, Academia Sinica</div>
         <ul>
           <li>Investigated the synergistic effect of nutlin-3a and the Wip1 inhibitor GSK 2830371 on p53-mediated cell death using single-cell imaging.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/project-technical-specialist/">
         <div class="entry-role">Project Technical Specialist I</div>
         <div class="entry-org">Disease Molecular Biology and Epigenetics Laboratory, National Institute of Molecular Biology and Biotechnology, UP Diliman</div>
         <ul>
@@ -423,65 +583,88 @@
           <li>Investigated the circPTK2–miR-92a–PTEN regulatory axis in A549 lung adenocarcinoma cells.</li>
           <li>Characterized the functional pseudogene INGX and its role in promoting cell cycle progression, survival, and migration in HCT116 colorectal cancer cells.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/undergraduate-thesis/">
         <div class="entry-role">Undergraduate Thesis Student</div>
         <div class="entry-org">Functional Genomics Laboratory, National Institute of Molecular Biology and Biotechnology, UP Diliman</div>
         <ul>
           <li>Thesis 1: Analyzed the transcriptome of the endoparasitoid <em>Comperiella calauanica</em> to profile chemosensory genes, using the Trinity, rnaSPAdes, and Trans-ABySS assemblers.</li>
           <li>Thesis 2: Conducted transcriptomic analysis of rice and the white stem borer in collaboration with the International Rice Research Institute (IRRI).</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/pgc-bioinformatics-training/">
         <div class="entry-role">PGC Bioinformatics Training and Internship Program</div>
         <div class="entry-org">Core Facility for Bioinformatics, Philippine Genome Center, UP Diliman</div>
         <ul>
           <li>Completed 240 hours of training in bioinformatics pipelines, including technical support for and development of the Integrated Sequence Local Alignment Pipeline for COVID-19 (ISLAP), a COVID-19 data management website.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/pgc-virtual-immersion/">
         <div class="entry-role">PGC Bioinformatics Virtual Immersion Program</div>
         <div class="entry-org">Core Facility for Bioinformatics, Philippine Genome Center, UP Diliman</div>
         <ul>
           <li>Trained in the full transcriptome analysis pipeline, from assembly through annotation, sponsored by the Functional Genomics Laboratory.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/plant-tissue-culture/">
         <div class="entry-role">Plant Tissue Culture Training</div>
         <div class="entry-org">Harbest Agribusiness Corporation, Pasig, Philippines</div>
         <ul>
           <li>Practiced micropropagation of orchids, aroids, and other ornamental plants under an industry-leading research laboratory.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/aseptic-tissue-culture/">
         <div class="entry-role">Aseptic Tissue Culture Training</div>
         <div class="entry-org">Philippine Horticultural Society Inc., Quezon City, Philippines</div>
         <ul>
           <li>Performed embryo rescue, meristem culture, and callus culture of orchids; induced mutations in orchid calli and fern spores to generate novel phenotypes.</li>
           <li>Aseptically cultured Drosera, Venus flytrap, and pitcher plant specimens.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/high-school-stem-research/">
         <div class="entry-role">High School STEM Research</div>
         <div class="entry-org">Philippine Science High School, Central Visayas Campus, Argao, Cebu</div>
         <ul>
           <li>Primary research: soil properties of Cebu cinnamon (<em>Cinnamomum cebuense</em>) forest reserves in Tabunan and Nug-As, Cebu.</li>
           <li>Secondary research: diversity of mollusks in the intertidal habitat of Taloot, Argao, Cebu.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
       <div class="entry">
+        <a class="entry-link" href="/research/marine-science-internship/">
         <div class="entry-role">Marine Science Summer Internship Program</div>
         <div class="entry-org">SEAFDEC Aquaculture Department, Tigbauan, Iloilo, Philippines</div>
         <ul>
           <li>Carried out identification, biodiversity assessment, and aquaculture work on fishes, mollusks, and crustaceans.</li>
         </ul>
+        <span class="entry-more">read more →</span>
+        </a>
       </div>
 
     </div>
@@ -498,63 +681,63 @@
     <div class="comp-group bioinfo">
       <div class="comp-label">bioinformatics</div>
       <div class="tag-row">
-        <span class="tag">FastQ trimming</span>
-        <span class="tag">Trinity</span>
-        <span class="tag">Trans-ABySS</span>
-        <span class="tag">rnaSPAdes</span>
-        <span class="tag">BUSCO</span>
-        <span class="tag">Bowtie2</span>
-        <span class="tag">TransRate</span>
-        <span class="tag">DESeq2</span>
-        <span class="tag">DIAMOND</span>
-        <span class="tag">Docker</span>
-        <span class="tag">Linux / Bash</span>
+        <a class="tag" href="/competencies/fastq-trimming/">FastQ trimming</a>
+        <a class="tag" href="/competencies/trinity/">Trinity</a>
+        <a class="tag" href="/competencies/trans-abyss/">Trans-ABySS</a>
+        <a class="tag" href="/competencies/rnaspades/">rnaSPAdes</a>
+        <a class="tag" href="/competencies/busco/">BUSCO</a>
+        <a class="tag" href="/competencies/bowtie2/">Bowtie2</a>
+        <a class="tag" href="/competencies/transrate/">TransRate</a>
+        <a class="tag" href="/competencies/deseq2/">DESeq2</a>
+        <a class="tag" href="/competencies/diamond/">DIAMOND</a>
+        <a class="tag" href="/competencies/docker/">Docker</a>
+        <a class="tag" href="/competencies/linux-bash/">Linux / Bash</a>
       </div>
     </div>
 
     <div class="comp-group software">
       <div class="comp-label">software &amp; analysis</div>
       <div class="tag-row">
-        <span class="tag">Python</span>
-        <span class="tag">R</span>
-        <span class="tag">Jupyter</span>
-        <span class="tag">Perl</span>
-        <span class="tag">GraphPad Prism</span>
-        <span class="tag">ImageJ</span>
-        <span class="tag">MATLAB</span>
-        <span class="tag">Snakemake</span>
-        <span class="tag">Git</span>
-        <span class="tag">Benchling</span>
-        <span class="tag">SnapGene Viewer</span>
-        <span class="tag">Swiss-Model</span>
+        <a class="tag" href="/competencies/python/">Python</a>
+        <a class="tag" href="/competencies/r/">R</a>
+        <a class="tag" href="/competencies/jupyter/">Jupyter</a>
+        <a class="tag" href="/competencies/perl/">Perl</a>
+        <a class="tag" href="/competencies/graphpad-prism/">GraphPad Prism</a>
+        <a class="tag" href="/competencies/imagej/">ImageJ</a>
+        <a class="tag" href="/competencies/matlab/">MATLAB</a>
+        <a class="tag" href="/competencies/snakemake/">Snakemake</a>
+        <a class="tag" href="/competencies/git/">Git</a>
+        <a class="tag" href="/competencies/benchling/">Benchling</a>
+        <a class="tag" href="/competencies/snapgene-viewer/">SnapGene Viewer</a>
+        <a class="tag" href="/competencies/swiss-model/">Swiss-Model</a>
       </div>
     </div>
 
     <div class="comp-group wetlab">
       <div class="comp-label">wet lab</div>
       <div class="tag-row">
-        <span class="tag">Single-cell / high-content imaging</span>
-        <span class="tag">ddPCR &amp; PCR</span>
-        <span class="tag">Gene cloning</span>
-        <span class="tag">Site-directed mutagenesis</span>
-        <span class="tag">Gel electrophoresis</span>
-        <span class="tag">Bacterial transformation</span>
-        <span class="tag">RNA extraction</span>
-        <span class="tag">RT-qPCR</span>
-        <span class="tag">SDS-PAGE / western blot</span>
-        <span class="tag">Mammalian cell culture</span>
+        <a class="tag" href="/competencies/single-cell-high-content-imaging/">Single-cell / high-content imaging</a>
+        <a class="tag" href="/competencies/ddpcr-and-pcr/">ddPCR &amp; PCR</a>
+        <a class="tag" href="/competencies/gene-cloning/">Gene cloning</a>
+        <a class="tag" href="/competencies/site-directed-mutagenesis/">Site-directed mutagenesis</a>
+        <a class="tag" href="/competencies/gel-electrophoresis/">Gel electrophoresis</a>
+        <a class="tag" href="/competencies/bacterial-transformation/">Bacterial transformation</a>
+        <a class="tag" href="/competencies/rna-extraction/">RNA extraction</a>
+        <a class="tag" href="/competencies/rt-qpcr/">RT-qPCR</a>
+        <a class="tag" href="/competencies/sds-page-western-blot/">SDS-PAGE / western blot</a>
+        <a class="tag" href="/competencies/mammalian-cell-culture/">Mammalian cell culture</a>
       </div>
     </div>
 
     <div class="comp-group other">
       <div class="comp-label">web &amp; graphics</div>
       <div class="tag-row">
-        <span class="tag">ReactJS</span>
-        <span class="tag">MongoDB</span>
-        <span class="tag">API development</span>
-        <span class="tag">Metabase</span>
-        <span class="tag">BioRender</span>
-        <span class="tag">Canva</span>
+        <a class="tag" href="/competencies/reactjs/">ReactJS</a>
+        <a class="tag" href="/competencies/mongodb/">MongoDB</a>
+        <a class="tag" href="/competencies/api-development/">API development</a>
+        <a class="tag" href="/competencies/metabase/">Metabase</a>
+        <a class="tag" href="/competencies/biorender/">BioRender</a>
+        <a class="tag" href="/competencies/canva/">Canva</a>
       </div>
     </div>
   </div>
@@ -568,23 +751,31 @@
     </div>
 
     <div class="talk">
-      <div class="talk-title">Probing into the synergistic effect of nutlin-3a and Wip1 inhibitor (GSK 2830371) on p53-mediated cell death using single-cell imaging</div>
-      <div class="talk-venue">Taiwan International Internship Program — Oral &amp; Poster Presentation</div>
+      <a class="talk-link" href="/talks/nutlin3a-wip1-p53-imaging/">
+        <div class="talk-title">Probing into the synergistic effect of nutlin-3a and Wip1 inhibitor (GSK 2830371) on p53-mediated cell death using single-cell imaging</div>
+        <div class="talk-venue">Taiwan International Internship Program — Oral &amp; Poster Presentation</div>
+      </a>
     </div>
 
     <div class="talk">
-      <div class="talk-title">The regulator is regulated: probing the circPTK2–miR-92a–PTEN regulatory axis in lung adenocarcinoma cells</div>
-      <div class="talk-venue">Philippine Society for Cell Biology, 7th International &amp; 15th Annual Meeting, Manila — Poster Presentation</div>
+      <a class="talk-link" href="/talks/circptk2-mir92a-pten-axis/">
+        <div class="talk-title">The regulator is regulated: probing the circPTK2–miR-92a–PTEN regulatory axis in lung adenocarcinoma cells</div>
+        <div class="talk-venue">Philippine Society for Cell Biology, 7th International &amp; 15th Annual Meeting, Manila — Poster Presentation</div>
+      </a>
     </div>
 
     <div class="talk">
-      <div class="talk-title">Profiling the transcriptomes of the white stem borer infesting resistant and susceptible rice varieties</div>
-      <div class="talk-venue">55th Pest Management Council of the Philippines Anniversary — Poster Presentation</div>
+      <a class="talk-link" href="/talks/white-stem-borer-transcriptomes/">
+        <div class="talk-title">Profiling the transcriptomes of the white stem borer infesting resistant and susceptible rice varieties</div>
+        <div class="talk-venue">55th Pest Management Council of the Philippines Anniversary — Poster Presentation</div>
+      </a>
     </div>
 
     <div class="talk">
-      <div class="talk-title">Identification of putative chemosensory genes from the transcriptomes of Comperiella calauanica</div>
-      <div class="talk-venue">54th Pest Management Council of the Philippines Anniversary — Oral Paper Presentation</div>
+      <a class="talk-link" href="/talks/comperiella-calauanica-chemosensory/">
+        <div class="talk-title">Identification of putative chemosensory genes from the transcriptomes of Comperiella calauanica</div>
+        <div class="talk-venue">54th Pest Management Council of the Philippines Anniversary — Oral Paper Presentation</div>
+      </a>
     </div>
   </div>
 </section>
@@ -633,7 +824,7 @@
       <a href="tel:+639164817667">+63 916 481 7667</a>
       <span>Quezon City, Metro Manila, Philippines</span>
     </div>
-    <div class="foot-note mono">John H. Torrejos — updated 2026</div>
+    <div class="foot-note mono">John Kyle H. Torrejos — updated 2026</div>
   </div>
 </footer>
 
